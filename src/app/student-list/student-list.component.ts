@@ -17,6 +17,7 @@ import {Router} from '@angular/router'
         <th>Academic Level</th>
         <th>GPA</th>
         <th>Course History</th>
+        <th></th>
       </tr>  
       
       <tr *ngFor="let student of student" class ="bg-success">
@@ -26,6 +27,9 @@ import {Router} from '@angular/router'
         <td>{{student.email}}</td>
         <td>{{student.academicLevel}}</td>
         <td>{{student.gpa}}</td>
+        <td>
+        {{student.credits.length}}
+        </td>
         <td>
         <button type="button" class="btn btn-light" (click) ="onSelect(student)">Detail</button>
         </td>
@@ -42,12 +46,12 @@ export class StudentListComponent implements OnInit {
   //use to display the array object
   //<p *ngFor="let c of student.credits"> {{c.termCompleted}} {{c.courseCode}} {{gradeEarned}}</p>
   ngOnInit() {
-    this._studentService.getStudent()
+    this._studentService.getStudents()
     .subscribe(data => this.student= data);
   }
 
   onSelect(student){
-this.router.navigate(['/studentdetail',student._id])
+    this.router.navigate(['/studentdetail',student._id])
   }
 
 }

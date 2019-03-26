@@ -13,8 +13,11 @@ export class StudentlistService {
   private _url:string ="http://localhost:8080/api/students"
 
   constructor(private http:HttpClient) { }
-  getStudent(): Observable<IStudent[]>{
+  getStudents(): Observable<IStudent[]>{
     return this.http.get<IStudent[]>(this._url); 
+  }
+  getStudent(id:string): Observable<IStudent>{
+    return this.http.get<IStudent>(this._url + "/" + id); 
   }
 }
 
