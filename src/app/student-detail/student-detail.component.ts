@@ -8,7 +8,7 @@ import { StudentlistService } from '../studentlist.service';
 <div class="container">
   <div class="row">
   <div class="col">
-<h3>Student detail - {{student.givenName}} {{student.familyName}}. {{student.studentId}}</h3>
+<h3>Student detail - {{student.givenName}} {{student.familyName}}. {{student.studentId}} <a class="btn btn-info" href="studentlist" role="button">Back to list</a></h3>
   </div>
   </div>
 
@@ -71,8 +71,8 @@ import { StudentlistService } from '../studentlist.service';
 
  </div> 
 <div class="col-md-4 col-4">
-  col-sm-4
-
+  <h6><b>Select courses for next term</b></h6> 
+  <a class="btn btn-primary" href="studentlist" role="button">Select courses</a>
 
 </div>
 
