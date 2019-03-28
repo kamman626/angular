@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import{ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router'
 import { StudentlistService } from '../studentlist.service';
+
 
 @Component({
   selector: 'app-student-detail',
@@ -72,7 +74,7 @@ import { StudentlistService } from '../studentlist.service';
  </div> 
 <div class="col-md-4 col-4">
   <h6><b>Select courses for next term</b></h6> 
-  <a class="btn btn-primary" href="studentlist" role="button">Select courses</a>
+  <a class="btn btn-primary" (click) ="onSelect(student)" role="button">Select courses</a>
 
 </div>
 
@@ -89,13 +91,18 @@ export class StudentDetailComponent implements OnInit {
 
   //public studentId;
   public student;
-  constructor(private _studentService: StudentlistService, private route: ActivatedRoute) { }
+ 
+  constructor(private _studentService: StudentlistService,private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     let id = (this.route.snapshot.paramMap.get('id'));
     //this.studentId = id; 
     this._studentService.getStudent(id)
     .subscribe(data => this.student= data);
+  }
+
+  onSelect(student){
+    this.router.navigate(['/enrollcart',student._id])
   }
 
 }

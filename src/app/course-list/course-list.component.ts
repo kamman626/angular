@@ -35,7 +35,7 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit() {
     this._courseService.getCourses()
-    .subscribe(data => this.course= data);
+    .subscribe(res => this.course= res);
   }
 
 }

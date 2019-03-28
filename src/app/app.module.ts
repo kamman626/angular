@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { EnrollCartComponent } from './enroll-cart/enroll-cart.component';
 //import { StudentDetailComponent } from './student-detail/student-detail.component';
 //import { StudentListComponent } from './student-list/student-list.component';
 
@@ -19,13 +20,14 @@ import { HomePageComponent } from './home-page/home-page.component';
    PageNotFoundComponent,
    CourseListComponent,
    HomePageComponent,
+   EnrollCartComponent,
   // StudentDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
-    
+    HttpClientModule,
+ 
   ],
   providers: [StudentlistService],
   bootstrap: [AppComponent]

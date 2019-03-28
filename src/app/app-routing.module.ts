@@ -5,12 +5,14 @@ import { StudentDetailComponent } from './student-detail/student-detail.componen
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { EnrollCartComponent } from './enroll-cart/enroll-cart.component';
 
 const routes: Routes = [
   {path: '', component:HomePageComponent},
   {path: 'studentlist', component:StudentListComponent},
   {path:'studentdetail/:id',component:StudentDetailComponent},
   {path: 'courselist',component:CourseListComponent  },
+  {path:'enrollcart/:id',component:EnrollCartComponent},
   {path:'**',component:PageNotFoundComponent}
 ];
 
@@ -20,4 +22,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [HomePageComponent,StudentListComponent, StudentDetailComponent, CourseListComponent,PageNotFoundComponent] //put all the routing component inside a array
+export const routingComponents = [HomePageComponent,StudentListComponent, StudentDetailComponent, CourseListComponent,EnrollCartComponent,PageNotFoundComponent] //put all the routing component inside a array

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentlistService } from '../studentlist.service';
 import {Router} from '@angular/router'
 
+
 @Component({
   selector: 'app-student-list',
   template: `
@@ -38,7 +39,8 @@ import {Router} from '@angular/router'
 
      </table>
   `,
-  styles: []
+  styles: [],
+  
 })
 export class StudentListComponent implements OnInit {
   public student = [];
