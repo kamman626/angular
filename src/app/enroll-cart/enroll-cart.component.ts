@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import{ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router'
 
 import { StudentlistService } from '../studentlist.service';
 import { CoursedetailService } from '../coursedetail.service';
@@ -7,9 +8,55 @@ import { empty } from 'rxjs';
 @Component({
   selector: 'app-enroll-cart',
   template: `
-    <p>
-      enroll-cart works!
-    </p>
+<div class="container">
+<div class = "row">
+<div class = "col-md-7 col-7">
+<h3>Student detail - {{student.givenName}} {{student.familyName}}. {{student.studentId}}        <button type="button" class="btn btn-light" (click) ="onSelect(student)">Back to detail</button></h3>
+  </div>
+
+  <div class="col-md-5 col-5">
+  <p>Select courses, then save, or confirm your selections</p> 
+  <button type="button" class="btn btn-light">Clear</button>
+  <button type="button" class="btn btn-info">Save for later</button>
+  <button type="button" class="btn btn-primary">Confirm as your time table</button>
+  </div>
+  </div>
+<hr>
+<div class="row">
+  <div class="col-md-7 col-7" >
+  <table style = "width:100%">
+  <tr>
+  <th><b>Course</b></th>
+  <th><b>Days and times</b></th>
+  <th><b>Enrolled</b></th>
+  <th><b>Professor</b></th>
+  <th><b>Add/Remove</b></th>
+  </tr>
+  <tr *ngFor="let ableCourse of ableCourse" >
+    <td>{{ableCourse.courseCode}}</td>
+
+    <td>
+      <span *ngIf="ableCourse.classMon == 'Y'">Monday</span>
+      <span *ngIf="ableCourse.classTue == 'Y'">Tuesday</span>
+      <span *ngIf="ableCourse.classWed == 'Y'">Wednesday</span>
+      <span *ngIf="ableCourse.classThu == 'Y'">Thursday</span>
+      <span *ngIf="ableCourse.classFri == 'Y'">Friday</span>
+{{ableCourse.classStart}} to {{ableCourse.classEnd}}    </td>
+
+
+    <td>{{ableCourse.enrolTotal}}</td>
+    <td>{{ableCourse.professor}}</td>
+    <td></td>
+  </tr>
+  
+  </table>
+  </div>
+
+  <div class="col-md-5 col-5">
+  </div>
+
+</div>
+</div>  
   `,
   styles: []
 })
@@ -19,7 +66,7 @@ export class EnrollCartComponent implements OnInit {
   public courses;
   public courseTaken;
   public ableCourse=[];
-  constructor(private _studentService: StudentlistService, private _courseService: CoursedetailService,private route: ActivatedRoute) { }
+  constructor(private _studentService: StudentlistService, private _courseService: CoursedetailService,private route: ActivatedRoute,private router: Router) { }
 
   ngOnInit() {
     let id = (this.route.snapshot.paramMap.get('id'));
@@ -56,6 +103,11 @@ export class EnrollCartComponent implements OnInit {
               });
 
   }
+  onSelect(student){
+    this.router.navigate(['/studentdetail',student._id])
+  }
+
+
 
 }
 
