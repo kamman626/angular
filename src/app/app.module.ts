@@ -9,6 +9,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { CourseListComponent } from './course-list/course-list.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { EnrollCartComponent } from './enroll-cart/enroll-cart.component';
+import{CartSelectedCellComponent} from'./cart-selected-cell.component';
+import{CartSelectedGridComponent} from'./cart-selected-grid.component';
+import{CartSelectedListComponent} from './cart-selected-list.component';
 //import { StudentDetailComponent } from './student-detail/student-detail.component';
 //import { StudentListComponent } from './student-list/student-list.component';
 
@@ -21,6 +24,9 @@ import { EnrollCartComponent } from './enroll-cart/enroll-cart.component';
    CourseListComponent,
    HomePageComponent,
    EnrollCartComponent,
+   CartSelectedCellComponent,
+   CartSelectedGridComponent,
+   CartSelectedListComponent
   // StudentDetailComponent
   ],
   imports: [

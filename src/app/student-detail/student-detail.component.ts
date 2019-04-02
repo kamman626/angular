@@ -33,6 +33,18 @@ import { StudentlistService } from '../studentlist.service';
   <th>Course</th>
   <th>Day and time</th>
 </tr>
+<hr>
+<tr *ngFor="let t of student.tentativeCourses">
+<td>{{t.term}}</td>
+<td>{{t.courseCode}}</td>
+<td> <span *ngIf="t.classMon == 'Y'">Monday</span>
+<span *ngIf="t.classTue == 'Y'">Tuesday</span>
+<span *ngIf="t.classWed == 'Y'">Wednesday</span>
+<span *ngIf="t.classThu == 'Y'">Thursday</span>
+<span *ngIf="t.classFri == 'Y'">Friday</span>
+<br>{{t.classStart}}  {{t.classEnd}}    </td>
+</tr>
+
 </table>
 </div>
 <hr>
@@ -47,6 +59,18 @@ import { StudentlistService } from '../studentlist.service';
   <th>Course</th>
   <th>Day and time</th>
 </tr>
+<hr>
+<tr *ngFor="let f of student.confirmedCourses">
+<td>{{f.term}}</td>
+<td>{{f.courseCode}}</td>
+<td> <span *ngIf="f.classMon == 'Y'">Monday</span>
+<span *ngIf="f.classTue == 'Y'">Tuesday</span>
+<span *ngIf="f.classWed == 'Y'">Wednesday</span>
+<span *ngIf="f.classThu == 'Y'">Thursday</span>
+<span *ngIf="f.classFri == 'Y'">Friday</span>
+<br>{{f.classStart}}  {{f.classEnd}}    </td>
+</tr>
+
 </table>
 </div>
 <hr>
@@ -90,7 +114,7 @@ import { StudentlistService } from '../studentlist.service';
 export class StudentDetailComponent implements OnInit {
 
   //public studentId;
-  public student;
+  public student =[];
  
   constructor(private _studentService: StudentlistService,private route: ActivatedRoute, private router: Router) { }
 
@@ -99,10 +123,47 @@ export class StudentDetailComponent implements OnInit {
     //this.studentId = id; 
     this._studentService.getStudent(id)
     .subscribe(data => this.student= data);
-  }
+   // console.log(this.student)
+  };
 
   onSelect(student){
     this.router.navigate(['/enrollcart',student._id])
   }
 
 }
+
+
+// <tr *ngFor="let t of student">
+// <td>{{t.tentativeCourses.term}}</td>
+// <td>{{t.tentativeCourses.courseCode}}</td>
+// <td> <span *ngIf="t.tentativeCourses.classMon == 'Y'">Monday</span>
+// <span *ngIf="t.tentativeCourses.classTue == 'Y'">Tuesday</span>
+// <span *ngIf="t.tentativeCourses.classWed == 'Y'">Wednesday</span>
+// <span *ngIf="t.tentativeCourses.classThu == 'Y'">Thursday</span>
+// <span *ngIf="t.tentativeCourses.classFri == 'Y'">Friday</span>
+// <br>{{t.tentativeCourses.classStart}}  {{t.tentativeCourses.classEnd}}    </td>
+// </tr>
+
+// <tr *ngFor="let t of student.tentativeCourses">
+// <td>{{t.term}}</td>
+// <td>{{t.courseCode}}</td>
+// <td> <span *ngIf="t.classMon == 'Y'">Monday</span>
+// <span *ngIf="t.classTue == 'Y'">Tuesday</span>
+// <span *ngIf="t.classWed == 'Y'">Wednesday</span>
+// <span *ngIf="t.classThu == 'Y'">Thursday</span>
+// <span *ngIf="t.classFri == 'Y'">Friday</span>
+// <br>{{t.classStart}}  {{t.classEnd}}    </td>
+// </tr>
+
+
+
+// <tr *ngFor="let f of student.confirmedCourses">
+// <td>{{f.term}}</td>
+// <td>{{f.courseCode}}</td>
+// <td> <span *ngIf="f.classMon == 'Y'">Monday</span>
+// <span *ngIf="f.classTue == 'Y'">Tuesday</span>
+// <span *ngIf="f.classWed == 'Y'">Wednesday</span>
+// <span *ngIf="f.classThu == 'Y'">Thursday</span>
+// <span *ngIf="f.classFri == 'Y'">Friday</span>
+// <br>{{f.classStart}}  {{f.classEnd}}    </td>
+// </tr>
