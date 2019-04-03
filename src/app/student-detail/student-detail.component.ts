@@ -114,7 +114,7 @@ import { StudentlistService } from '../studentlist.service';
 export class StudentDetailComponent implements OnInit {
 
   //public studentId;
-  public student =[];
+  public student ;
  
   constructor(private _studentService: StudentlistService,private route: ActivatedRoute, private router: Router) { }
 
@@ -124,8 +124,9 @@ export class StudentDetailComponent implements OnInit {
     this._studentService.getStudent(id)
     .subscribe(data => this.student= data);
    // console.log(this.student)
+   
   };
-
+ 
   onSelect(student){
     this.router.navigate(['/enrollcart',student._id])
   }

@@ -9,6 +9,7 @@ export class CoursedetailService {
 
 
   private _url:string ="https://quiet-badlands-65457.herokuapp.com/api/courses"
+ //private _url:string ="http://localhost:8080/api/courses"
 
   httpOptions={
     headers: new HttpHeaders({'Content-Type': 'application/json'})

@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class StudentlistService {
 
   private _url:string ="https://quiet-badlands-65457.herokuapp.com/api/students"
+  //private _url:string ="http://localhost:8080/api/students"
 
    httpOptions={
      headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -20,12 +21,12 @@ export class StudentlistService {
   getStudents(): Observable<IStudent[]>{
     return this.http.get<IStudent[]>(this._url); 
   }
-  getStudent(id:string): Observable<IStudent[]>{
-    return this.http.get<IStudent[]>(this._url + "/" + id); 
+  getStudent(id:string): Observable<IStudent>{
+    return this.http.get<IStudent>(this._url + "/" + id); 
   }
 
-  get1Student(id:string): Observable<IStudent>{
-    return this.http.get<IStudent>(this._url + "/" + id); 
+  get1Student(id:string[]): Observable<IStudent[]>{
+    return this.http.get<IStudent[]>(this._url + "/" + id); 
   }
 
   saveStudent(istudent:IStudent, id:string): Observable<IStudent>{

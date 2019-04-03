@@ -59,7 +59,7 @@ export class CartSelectedGridComponent implements OnInit, DoCheck {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals
     this.coursesSelected.forEach(c => {
       this.coursesSelectedForUI.push({ ...c, gridCells: this.getPeriods(c) });
-      console.log(this.coursesSelected)
+   //   console.log(this.coursesSelected)
     });
     // Sort the result
     this.coursesSelectedForUI.sort((a, b) => a.gridCells[0] - b.gridCells[0]);

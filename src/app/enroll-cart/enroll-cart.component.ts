@@ -21,6 +21,7 @@ import { empty } from 'rxjs';
   <button style="margin:3px" type="button" class="btn btn-light" (click)="clearButton()" >Clear</button>
   <button style="margin:3px" type="button" class="btn btn-info" (click) ="saveLater() ">Save for later</button>
   <button style="margin:3px"type="button" class="btn btn-primary" (click)="confirmSave()" >Confirm as your time table</button>
+  <p style="color:red"><b>            {{messageSave}}</b></p>
   </div>
   </div>
 <hr>
@@ -96,29 +97,30 @@ import { empty } from 'rxjs';
 })
 export class EnrollCartComponent implements OnInit {
 
-  public student = [];
+  public student;
   public courses;
   public courseTaken;
   public ableCourse=[];
   public selectedCourse=[];
+  public messageSave;
   
   constructor(private _studentService: StudentlistService, private _courseService: CoursedetailService,private route: ActivatedRoute,private router: Router) { }
 
   ngOnInit() {
     let id = (this.route.snapshot.paramMap.get('id'));
     //this.studentId = id; 
-    this._studentService.get1Student(id)
+    this._studentService.getStudent(id)
     
     .subscribe(res=>{
-                      this.student[0]=res
+                      this.student=res
                       this.courseTaken=res['credits'].map(res=>res.courseCode)
-                      if(this.student[0].tentativeCourses){
-                        this.selectedCourse = this.student[0].tentativeCourses
+                      if(this.student.tentativeCourses){
+                        this.selectedCourse = this.student.tentativeCourses
                       }
-                      else if (this.student[0].confirmedCourses){
-                        this.selectedCourse = this.student[0].confirmedCourses}
+                      // else if (this.student.confirmedCourses){
+                      //   this.selectedCourse = this.student.confirmedCourses}
                     
-                    console.log(this.student)
+  
                   })
                  
     
@@ -128,7 +130,7 @@ export class EnrollCartComponent implements OnInit {
                       this.ableCourse = res.filter(r => {
                         if (this.courseTaken.indexOf(r.courseCode) == -1){
                           if(r.enrolTotal < 4){
-                           if(r.academicProgram == this.student[0].academicProgram){
+                           if(r.academicProgram == this.student.academicProgram){
                              if(r.term == "2019 Winter"){
                         if(r.prerequisite.length > 0)
                             //filter will loop the prerequisite, c is the prerequisits course, to check is the courseTaken have c, if have c, do not return -1, and filter will increment by it self.
@@ -179,23 +181,24 @@ export class EnrollCartComponent implements OnInit {
              
   saveLater(){
     
-    this.student[0].tentativeCourses=this.selectedCourse;
-   // console.log(this.student.tentativeCourses)
+    this.student.tentativeCourses=this.selectedCourse;
+    //console.log(this.student.tentativeCourses)
 
     let id = (this.route.snapshot.paramMap.get('id'));
-    this.router.navigate(['/studentdetail',this.student[0]._id])
-    return this._studentService.saveStudent(this.student[0],id).subscribe()
+   // this.router.navigate(['/studentdetail',this.student._id])
+   this.messageSave="Tentative save success"
+   return this._studentService.saveStudent(this.student,id).subscribe()
   }
 
   confirmSave(){
     
     //  this.student.confirmedCourses = [];
-     this.student[0].confirmedCourses=this.selectedCourse;
-     this.student[0].tentativeCourses=[];
+     this.student.confirmedCourses=this.selectedCourse;
+     this.student.tentativeCourses=[];
    // console.log(this.student.tentativeCourses)
 
     let id = (this.route.snapshot.paramMap.get('id'));
-    this.router.navigate(['/studentdetail',this.student[0]._id])
+    //this.router.navigate(['/studentdetail',this.student._id])
 //--------------
     
     //   if(this.student.confirmedCourses.find(this.courses)){
@@ -205,7 +208,8 @@ export class EnrollCartComponent implements OnInit {
       
     //  this._courseService.saveCourses(this.courses).subscribe
 //---------------data=>this.student.push(data)
-    return this._studentService.saveStudent(this.student[0],id).subscribe()
+  this.messageSave="Final save success"  
+  return this._studentService.saveStudent(this.student,id).subscribe()
   }
 
 
@@ -213,11 +217,12 @@ export class EnrollCartComponent implements OnInit {
 
   clearButton(){
     
-    this.student[0].tentativeCourses = [];
-    this.student[0].selectedCourse=[];
+    this.student.tentativeCourses = [];
+    this.student.selectedCourse=[];
     
-    this.router.navigate(['/studentdetail',this.student[0]._id])
-    return this._studentService.saveStudent(this.student[0],this.student[0]._id).subscribe()
+    //this.router.navigate(['/studentdetail',this.student._id])
+    this.messageSave="Clear success"
+    return this._studentService.saveStudent(this.student,this.student._id).subscribe()
   }
 
 
